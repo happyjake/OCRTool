@@ -1,0 +1,9 @@
+name: OCRTool
+options:
+  bundleIdPrefix: com.example
+targets:
+  ORC:
+    type: tool
+    platform: macOS
+    sources:
+      - path: OCR.swift
