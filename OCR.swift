@@ -110,18 +110,22 @@ func printHelp() {
     print(usage)
 }
 
-let arguments = CommandLine.arguments
-if arguments.count < 2 {
-    printHelp()
-} else if arguments.contains("--help") {
-    printHelp()
-} else {
-    let imagePath = arguments[1]
-    var languages = arguments.dropFirst(2).joined(separator: " ").components(separatedBy: ",").filter {
-        !$0.isEmpty
+func main() {
+    let arguments = CommandLine.arguments
+    if arguments.count < 2 {
+        printHelp()
+    } else if arguments.contains("--help") {
+        printHelp()
+    } else {
+        let imagePath = arguments[1]
+        var languages = arguments.dropFirst(2).joined(separator: " ").components(separatedBy: ",").filter {
+            !$0.isEmpty
+        }
+        if languages.isEmpty {
+            languages = ["en-US", "zh-Hans", "zh-Hant"]
+        }
+        processImage(imagePath, languages: languages)
     }
-    if languages.isEmpty {
-        languages = ["en-US", "zh-Hans", "zh-Hant"]
-    }
-    processImage(imagePath, languages: languages)
 }
+
+main()
